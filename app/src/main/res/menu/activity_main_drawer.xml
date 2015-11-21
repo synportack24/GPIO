@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_main" android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="Main" />
+        <item android:id="@+id/nav_gpio" android:icon="@android:drawable/ic_menu_manage"
+            android:title="GPIO" />
+        <item android:id="@+id/nav_adc" android:icon="@android:drawable/ic_menu_gallery"
+            android:title="ADC" />
+        <item android:id="@+id/nav_pwm" android:icon="@android:drawable/ic_menu_manage"
+            android:title="PWM" />
+    </group>
+
+    <item android:title="sysfs">
+        <menu>
+            <item android:id="@+id/nav_sysfstemp" android:icon="@android:drawable/ic_menu_share"
+                android:title="sysfs Tempurature" />
+            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>
