@@ -13,7 +13,7 @@
 int fd_temps[2];
 
 float getTempuratureFromZone(int zone){
-	float tempurature = -1f;
+	float tempurature = -1.0f;
 
 	if(zone < 0 || zone > 2)
 		zone = 0; // default this to 0
