@@ -21,7 +21,10 @@ model {
     }
 
     android.ndk {
-        moduleName = "hello-jni"
+        moduleName = "cgpio"
+        platformVersion = 19
+        CFlags += "-DANDROID".toString()
+        CFlags += "-I${file("src/main/jni/sysfs")}".toString()
     }
 
     android.buildTypes {
