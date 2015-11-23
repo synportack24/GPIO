@@ -96,17 +96,22 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
 
         if (id == R.id.nav_main) {
+            setTitle("GPIO Map");
             fragment = new main_fragment();
         } else if (id == R.id.nav_gpio) {
+            setTitle("GPIO");
             fragment = new gpio_fragment();
         } else if (id == R.id.nav_adc) {
+            setTitle("ADC values");
             fragment = new adc_fragment();
         } else if (id == R.id.nav_pwm) {
+            setTitle("PWM pin");
             fragment = new pwm_fragment();
         } else if (id == R.id.nav_send) {
 
             // SYSFS Options
         } else if (id == R.id.nav_sysfstemp) {
+            setTitle("sysfs Tempurature");
             fragment = new sysfstempurature_fragment();
         }
 
@@ -122,6 +127,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private void SetTitle(String title) {
+        try {
+            getActionBar().setTitle(title);
+        } catch(Exception e) {
+            //Log
+        }
+    }
 
     public native String testFunction();
 

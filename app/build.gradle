@@ -25,6 +25,7 @@ model {
         platformVersion = 19
         CFlags += "-DANDROID".toString()
         CFlags += "-I${file("src/main/jni/sysfs")}".toString()
+        CFlags += "-I${file("src/main/jni/gpio")}".toString()
     }
 
     android.buildTypes {
