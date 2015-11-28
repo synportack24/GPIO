@@ -96,6 +96,7 @@ bool digitalWrite(int pin, int state){
 	if( (fd_pin = open(pinPath, O_RDWR)) == -1) {
 		printf("failed to set pin %d, to %d", pin, state);
 		perror("=(");
+		return false;
 	} else {
 		switch(state){
 		case 0: // IN
@@ -106,17 +107,43 @@ bool digitalWrite(int pin, int state){
 			break;
 		default:
 			printf("set state %d not allowable for pin %d", state, pin);
+			return false;
 			break;
 		}
 	}
+	return true;
 }
 
 int digitalRead(int pin){
 	int pinValue = -1;
 
+	memset(pinPath, 0 , sizeof(pinPath));
+	sprintf(pinPath, "%s%d%s", GPIO_PATH, pin, "/value");
 
+	int fd_pin;
 
-	return pinValue;
+	if( (fd_pin = open(pinPath, O_RDONLY)) == -1) {
+		printf("failed to read pin %d", pin);
+		perror("=(");
+		return false;
+	} else {
+		char pinChar;
+		read(fd_pin, &pinChar, 1);
+
+		switch(pinChar){
+		case '0':
+			return 0;
+			break;		// I think this is unreachable...
+		case '1':
+			return 1;
+			break;
+		default:
+			printf("Unknown value read from pin %d", pin);
+			return -1;	// ERROR
+		}
+	}
+
+	return -1;
 }
 
 bool exportPin(int pin){
@@ -126,7 +153,7 @@ bool exportPin(int pin){
 	int fd_exportPath;
 
 	if( (fd_exportPath = open(GPIO_EXPORT, O_RDWR)) == -1 ){
-		printf("unable to export pin %s", pin);
+		printf("unable to export pin %d", pin);
 		perror("=(");
 		return false;
 	} else {
@@ -142,7 +169,7 @@ bool unexportPin(int pin){
 	int fd_exportPath;
 
 	if( (fd_exportPath = open(GPIO_UNEXPORT, O_RDWR)) == -1 ){
-		printf("unable to unexport pin %s", pin);
+		printf("unable to unexport pin %d", pin);
 		perror("=(");
 		return false;
 	} else {

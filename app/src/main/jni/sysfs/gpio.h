@@ -13,11 +13,7 @@
 #define GPIO_EXPORT			SYSFS_GPIO_PATH "/export"
 #define GPIO_UNEXPORT		SYSFS_GPIO_PATH "/unexport"
 
-#define PIN_HIGH	'1' //Needs to be a char not int
-#define PIN_LOW		'0'
 
-#define PIN_INPUT	'0'
-#define PIN_OUTPUT	'1'
 
 
 // ADC
