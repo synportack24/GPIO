@@ -86,7 +86,7 @@ int analogRead(int pin){
 
 bool digitalWrite(int pin, int state){
 	memset(pinPath, 0 , sizeof(pinPath));
-	sprintf(pinPath, "%s%d%s", GPIO_PATH, pin, "/value");
+	sprintf(pinPath, "%s/gpio%d%s", GPIO_PATH, pin, "/value");
 
 //	if (state != 0 || state != 1)
 //		return false;	// only setting for
@@ -118,7 +118,7 @@ int digitalRead(int pin){
 	int pinValue = -1;
 
 	memset(pinPath, 0 , sizeof(pinPath));
-	sprintf(pinPath, "%s%d%s", GPIO_PATH, pin, "/value");
+	sprintf(pinPath, "%s/gpio%d%s", GPIO_PATH, pin, "/value");
 
 	int fd_pin;
 

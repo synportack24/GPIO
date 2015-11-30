@@ -5,13 +5,13 @@
 
 // GPIO
 // /sys/class/aml_gpio
-#define SYSFS_GPIO_PATH		"/sys/class/aml_gpio"
-//#define SYSFS_GPIO_PATH	"/sys/devices/virtual/"
+//#define SYSFS_PATH		"/sys/class/aml_gpio"
+#define SYSFS_PATH          "/sys/class"
 #define GPIO_MODE_PATH		"/sys/devices/virtual/gpio/mode/"
 #define GPIO_PIN_PATH		"/sys/devices/virtual/gpio/pin"
-#define GPIO_PATH			SYSFS_GPIO_PATH "/gpio"
-#define GPIO_EXPORT			SYSFS_GPIO_PATH "/export"
-#define GPIO_UNEXPORT		SYSFS_GPIO_PATH "/unexport"
+#define GPIO_PATH            SYSFS_PATH "/gpio"
+#define GPIO_EXPORT          GPIO_PATH "/export"
+#define GPIO_UNEXPORT        GPIO_PATH "/unexport"
 
 
 

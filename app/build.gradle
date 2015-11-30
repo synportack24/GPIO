@@ -22,10 +22,10 @@ model {
 
     android.ndk {
         moduleName = "cgpio"
-        platformVersion = 19
+        platformVersion = 21
         CFlags += "-DANDROID".toString()
         CFlags += "-I${file("src/main/jni/sysfs")}".toString()
-        CFlags += "-I${file("src/main/jni/gpio")}".toString()
+        CFlags += "-I${file("src/main/jni/sensors")}".toString()
     }
 
     android.buildTypes {

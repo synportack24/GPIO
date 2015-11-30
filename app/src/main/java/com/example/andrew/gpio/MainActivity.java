@@ -17,6 +17,7 @@ import android.view.MenuItem;
 
 import com.example.andrew.gpio.com.example.android.gpio.fragments.adc_fragment;
 import com.example.andrew.gpio.com.example.android.gpio.fragments.gpio_fragment;
+import com.example.andrew.gpio.com.example.android.gpio.fragments.i2c_fragment;
 import com.example.andrew.gpio.com.example.android.gpio.fragments.main_fragment;
 import com.example.andrew.gpio.com.example.android.gpio.fragments.pwm_fragment;
 import com.example.andrew.gpio.com.example.android.gpio.fragments.sysfstempurature_fragment;
@@ -107,12 +108,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_pwm) {
             setTitle("PWM pin");
             fragment = new pwm_fragment();
-        } else if (id == R.id.nav_send) {
 
             // SYSFS Options
         } else if (id == R.id.nav_sysfstemp) {
             setTitle("sysfs Tempurature");
             fragment = new sysfstempurature_fragment();
+        } else if (id == R.id.nav_i2c) {
+            setTitle("I2C External Sensors");
+            fragment = new i2c_fragment();
         }
 
         if(fragment != null) {
@@ -135,7 +138,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public native String testFunction();
+    public native void gpio_init();
 
     static {
         System.loadLibrary("cgpio");
