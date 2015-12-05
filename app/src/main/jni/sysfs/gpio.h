@@ -21,15 +21,23 @@
 #define ADC_PATH0 "/sys/class/saradc/saradc_ch0"
 #define ADC_PATH1 "/sys/class/saradc/saradc_ch0"
 
+#define PIN_INPUT 0
+#define PIN_OUTPUT 1
 
+
+// Setting
 bool exportPin(int pin);
 bool unexportPin(int pin);
 
 bool pinMode(int pin, int state);
-int analogRead(int pin);
-
-int digitalRead(int pin);
 bool digitalWrite(int pin, int state);
 
+// Reading
+int analogRead(int pin);
+int digitalRead(int pin);
 
+// IRQ
+bool setEdge(int pin);  // should this be exposed? I think not
+void IRQ(int pin);
 #endif /* GPIO_H_ */
+
