@@ -63,6 +63,30 @@ public class sysfstempurature_fragment extends Fragment {
         t1m.put("Value", thermalZone1);
         syslist.add(t1m);
 
+        String lversion = getLinuxVersion();
+        if(lversion == null)
+            lversion = "Not Found";
+        Map<String, String> v1m = new HashMap<>();
+        v1m.put("Name", "Linux Version");
+        v1m.put("Value", lversion);
+        syslist.add(v1m);
+
+        float b1 = getTimeSinceBoot();
+        String bootTime = b1 > 0 ? String.format("%6.2f Seconds", b1) : "NA";
+        Map<String, String> b1m = new HashMap<>();
+        b1m.put("Name", "Time Since Boot");
+        b1m.put("Value", bootTime);
+        syslist.add(b1m);
+
+        float b2 = getTimeSinceIdle();
+        String idleTime = b2 > 0 ? String.format("%6.2f Seconds", b2) : "NA";
+        Map<String, String> b2m = new HashMap<>();
+        b2m.put("Name", "Time Since Idle");
+        b2m.put("Value", idleTime);
+        syslist.add(b2m);
+
+
+
         ls = (ListView) rootView.findViewById(R.id.listViewSysfsInfo);
 
         //Context ctext = getActivity().getApplicationContext();  // getContext not valid for API 19 =(
@@ -78,4 +102,8 @@ public class sysfstempurature_fragment extends Fragment {
     public native float getsysfstempurature(int zone);
 
     public native String getLinuxVersion();
+
+    public native float getTimeSinceBoot();
+
+    public native float getTimeSinceIdle();
 }
