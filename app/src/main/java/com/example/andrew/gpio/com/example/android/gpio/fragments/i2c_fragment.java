@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.andrew.gpio.R;
@@ -19,7 +21,7 @@ public class i2c_fragment extends Fragment {
 
     TextView tvTemp;
     TextView tvPres;
-    ProgressBar humidityBar;
+    SeekBar humidityBar;
 
     @Nullable
     @Override
@@ -30,20 +32,24 @@ public class i2c_fragment extends Fragment {
 
         tvTemp = (TextView) rootView.findViewById(R.id.textViewi2cTemp);
         tvPres = (TextView) rootView.findViewById(R.id.textViewi2cPressure);
-        humidityBar = (ProgressBar) rootView.findViewById(R.id.progressBari2cHumidity);
+        humidityBar = (SeekBar) rootView.findViewById(R.id.seekBari2cHumidity);
 
         UpdateValues();
 
+        Button updateBtn = (Button) rootView.findViewById(R.id.buttoni2cUpdateSensors);
+        updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpdateValues();
+            }
+        });
 
 
         return  rootView;
     }
 
-    public void onClick_Update(View view){
-        UpdateValues();
-    }
 
-    private void UpdateValues() {
+    public void UpdateValues() {
         updateSensors();
         float temp = getTemperature();
         float pres = getPressure();

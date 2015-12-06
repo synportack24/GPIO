@@ -1,14 +1,23 @@
 package com.example.andrew.gpio.com.example.android.gpio.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.example.andrew.gpio.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -16,8 +25,7 @@ import com.example.andrew.gpio.R;
  */
 public class sysfstempurature_fragment extends Fragment {
 
-    TextView tvZone0;
-    TextView tvZone1;
+    ListView ls;
     public sysfstempurature_fragment() {
         super();
 
@@ -25,7 +33,13 @@ public class sysfstempurature_fragment extends Fragment {
 
     }
 
+    private Context attachedContext;
 
+    @Override
+    public void onAttach(Context context) {
+        attachedContext = context;
+        super.onAttach(context);
+    }
 
     @Nullable
     @Override
@@ -33,17 +47,29 @@ public class sysfstempurature_fragment extends Fragment {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_sysfstempurature, container, false);
 
-
-        tvZone0 = (TextView) rootView.findViewById(R.id.textViewThermalZone0);
-        tvZone1 = (TextView) rootView.findViewById(R.id.textViewThermalZone1);
+        List<Map<String, String>> syslist = new ArrayList<Map<String, String>>();
 
         float f0 = getsysfstempurature(0);
-        String szone0 = f0 > 0 ? String.format("Thermal Zone0: %4.2f C", f0) : "Thermal Zone0: NA";
-        tvZone0.setText(szone0);
+        String thermalZone0 = f0 > 0 ? String.format("%4.2f C", f0) : "NA";
+        Map<String, String> t0m = new HashMap<>();
+        t0m.put("Name", "Thermal Zone 0");
+        t0m.put("Value", thermalZone0);
+        syslist.add(t0m);
 
-        float f1 = getsysfstempurature(1);
-        String szone1 = f1 > 0 ? String.format("Thermal Zone1: %4.2f C", f1) : "Thermal Zone1: NA";
-        tvZone1.setText(szone1);
+        float f1 = getsysfstempurature(0);
+        String thermalZone1 = f1 > 0 ? String.format("%4.2f C", f1) : "NA";
+        Map<String, String> t1m = new HashMap<>();
+        t1m.put("Name", "Thermal Zone 1");
+        t1m.put("Value", thermalZone1);
+        syslist.add(t1m);
+
+        ls = (ListView) rootView.findViewById(R.id.listViewSysfsInfo);
+
+        //Context ctext = getActivity().getApplicationContext();  // getContext not valid for API 19 =(
+        //SimpleAdapter adapter = new SimpleAdapter(ctext, syslist,  android.R.layout.simple_list_item_2, new String[] {"Name", "Value"}, new int[] {android.R.id.text1, android.R.id.text2});
+        SimpleAdapter adapter = new SimpleAdapter(attachedContext, syslist,  android.R.layout.simple_list_item_2, new String[] {"Name", "Value"}, new int[] {android.R.id.text1, android.R.id.text2});
+        ls.setAdapter(adapter);
+
 
         return  rootView;
     }
@@ -51,4 +77,5 @@ public class sysfstempurature_fragment extends Fragment {
 
     public native float getsysfstempurature(int zone);
 
+    public native String getLinuxVersion();
 }

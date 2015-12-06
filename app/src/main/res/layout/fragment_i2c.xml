@@ -37,40 +37,39 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBari2cHumidity"
-            android:max="100"
-            android:progress="50"
-            android:indeterminate="false"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Humidity"
             android:id="@+id/textViewi2cHumidity"
-            android:layout_above="@+id/progressBari2cHumidity"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UPDATE!"
-            android:id="@+id/buttonUpdateSensors"
+            android:id="@+id/buttoni2cUpdateSensors"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
+
+        <SeekBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBari2cHumidity"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/textViewi2cHumidity"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:max="100"
+            android:progress="64"
+            android:indeterminate="false" />
 
     </RelativeLayout>
 </FrameLayout>

@@ -12,10 +12,10 @@
             android:title="PWM" />
     </group>
 
-    <item android:title="Tempurature">
+    <item android:title="Information">
         <menu>
-            <item android:id="@+id/nav_sysfstemp" android:icon="@android:drawable/ic_menu_share"
-                android:title="sysfs Tempurature" />
+            <item android:id="@+id/nav_sysfsInfo" android:icon="@android:drawable/ic_menu_share"
+                android:title="sysfs Information" />
             <item android:id="@+id/nav_i2c" android:icon="@android:drawable/ic_menu_send"
                 android:title="External Environment" />
         </menu>

@@ -2,27 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Thermal Zone0:"
-        android:id="@+id/textViewThermalZone0"
-        android:layout_gravity="left|top" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Thermal Zone1:"
-        android:id="@+id/textViewThermalZone1"
-        android:layout_gravity="left|center_vertical" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="SysFS Tempurature"
-        android:id="@+id/textView4"
-        android:layout_gravity="center_horizontal|bottom" />
+        android:layout_height="477dp"
+        android:id="@+id/listViewSysfsInfo"
+        android:layout_gravity="top|center" />
 </FrameLayout>

@@ -110,8 +110,8 @@ public class MainActivity extends AppCompatActivity
             fragment = new pwm_fragment();
 
             // SYSFS Options
-        } else if (id == R.id.nav_sysfstemp) {
-            setTitle("sysfs Tempurature");
+        } else if (id == R.id.nav_sysfsInfo) {
+            setTitle("sysfs Information");
             fragment = new sysfstempurature_fragment();
         } else if (id == R.id.nav_i2c) {
             setTitle("I2C External Sensors");

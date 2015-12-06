@@ -28,7 +28,7 @@ float getTempuratureFromZone(int zone){
 
 
 	if( (fd_temps[zone] = open(tempPath, O_RDONLY)) == -1 ){
-		printf("Something bad happed");
+		printf("Get Temperature Error\n");
 		perror("=(");
 	} else {
 		lseek(fd_temps[zone], 0, SEEK_SET);
@@ -40,3 +40,16 @@ float getTempuratureFromZone(int zone){
 	return tempurature;
 }
 
+void getLinuxVersion(char* versionPntr){
+
+	int fd_version;
+
+	if( (fd_version = open("/proc/version_signature", O_RDONLY)) == -1){
+		printf("Proc Version Error\n");
+		perror("Proc Version: ");
+	} else {
+		lseek(fd_version, 0, SEEK_SET);
+		read(fd_version, versionPntr, VERSION_BUFFER);
+	}
+
+}

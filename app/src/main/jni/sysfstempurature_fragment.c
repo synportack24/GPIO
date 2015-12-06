@@ -41,3 +41,16 @@ Java_com_example_andrew_gpio_com_example_android_gpio_fragments_i2c_1fragment_ge
         return getPressure();
 
 }
+
+JNIEXPORT jstring JNICALL
+Java_com_example_andrew_gpio_com_example_android_gpio_fragments_sysfstempurature_1fragment_getLinuxVersion(
+        JNIEnv *env, jobject instance) {
+
+        // TODO
+
+        char version[VERSION_BUFFER];
+
+        getLinuxVersion(&version);
+
+        return (*env)->NewStringUTF(env, version);
+}
