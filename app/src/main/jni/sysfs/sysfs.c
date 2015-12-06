@@ -12,6 +12,8 @@
 
 int fd_temps[2];
 
+
+
 float getTempuratureFromZone(int zone){
 	float tempurature = -1.0f;
 
@@ -33,7 +35,7 @@ float getTempuratureFromZone(int zone){
 	} else {
 		lseek(fd_temps[zone], 0, SEEK_SET);
 		read(fd_temps[zone], &rdbuf, sizeof(rdbuf));
-		tempurature = atof(rdbuf);
+		tempurature = strtod(rdbuf, NULL);
 		tempurature = tempurature/1000;
 	}
 
@@ -92,7 +94,7 @@ float getUpTimeSinceBoot(){
 		int pos = findChar(rdbuf, ' ');
 		if(pos != -1){
 			strncpy(boot, rdbuf, pos);
-			uptime = atof(boot);
+			uptime = strtod(boot, NULL);
 		}
 	}
 
@@ -121,7 +123,7 @@ float getUpTimeSinceIdle() {
 			char* rdbuf2 = rdbuf;
 			rdbuf2 = rdbuf2 + pos + 1;
 			strncpy(boot, rdbuf2, strlen(rdbuf2));
-			uptime = atof(boot);
+			uptime = strtod(boot, NULL);
 		}
 	}
 

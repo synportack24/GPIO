@@ -24,6 +24,7 @@ model {
         moduleName = "cgpio"
         platformVersion = 21
         CFlags += "-DANDROID".toString()
+        CFlags += "-D_NDK_MATH_NO_SOFTFP=0".toString()
         CFlags += "-I${file("src/main/jni/sysfs")}".toString()
         CFlags += "-I${file("src/main/jni/sensors")}".toString()
     }

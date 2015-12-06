@@ -2,6 +2,7 @@ package com.example.andrew.gpio;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.andrew.gpio.com.example.android.gpio.fragments.adc_fragment;
 import com.example.andrew.gpio.com.example.android.gpio.fragments.gpio_fragment;
@@ -22,8 +24,12 @@ import com.example.andrew.gpio.com.example.android.gpio.fragments.main_fragment;
 import com.example.andrew.gpio.com.example.android.gpio.fragments.pwm_fragment;
 import com.example.andrew.gpio.com.example.android.gpio.fragments.sysfstempurature_fragment;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static Process mProcess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,11 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame, new main_fragment()).commit();
 
+        try {
+            mProcess = Runtime.getRuntime().exec("su");
+        } catch (IOException e){
+            Toast.makeText(this, "Unable to get root access, some functions might not work", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -137,6 +148,19 @@ public class MainActivity extends AppCompatActivity
             //Log
         }
     }
+
+
+    public void IRQ_Toast(){
+        Toast.makeText(this, "GPIO Interrupt!", Toast.LENGTH_LONG).show();
+
+
+//        Intent intent = new Intent(this, NotificationReceiver.class);
+
+    }
+
+    public native void setupInterrupt();
+
+
 
     public native void gpio_init();
 

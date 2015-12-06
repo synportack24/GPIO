@@ -56,7 +56,7 @@ public class sysfstempurature_fragment extends Fragment {
         t0m.put("Value", thermalZone0);
         syslist.add(t0m);
 
-        float f1 = getsysfstempurature(0);
+        float f1 = getsysfstempurature(1);
         String thermalZone1 = f1 > 0 ? String.format("%4.2f C", f1) : "NA";
         Map<String, String> t1m = new HashMap<>();
         t1m.put("Name", "Thermal Zone 1");
@@ -89,9 +89,9 @@ public class sysfstempurature_fragment extends Fragment {
 
         ls = (ListView) rootView.findViewById(R.id.listViewSysfsInfo);
 
-        //Context ctext = getActivity().getApplicationContext();  // getContext not valid for API 19 =(
-        //SimpleAdapter adapter = new SimpleAdapter(ctext, syslist,  android.R.layout.simple_list_item_2, new String[] {"Name", "Value"}, new int[] {android.R.id.text1, android.R.id.text2});
-        SimpleAdapter adapter = new SimpleAdapter(attachedContext, syslist,  android.R.layout.simple_list_item_2, new String[] {"Name", "Value"}, new int[] {android.R.id.text1, android.R.id.text2});
+        Context ctext = getActivity().getBaseContext();  // getContext not valid for API 19 =(
+        SimpleAdapter adapter = new SimpleAdapter(ctext, syslist,  android.R.layout.simple_list_item_2, new String[] {"Name", "Value"}, new int[] {android.R.id.text1, android.R.id.text2});
+        //SimpleAdapter adapter = new SimpleAdapter(attachedContext, syslist,  android.R.layout.simple_list_item_2, new String[] {"Name", "Value"}, new int[] {android.R.id.text1, android.R.id.text2});
         ls.setAdapter(adapter);
 
 

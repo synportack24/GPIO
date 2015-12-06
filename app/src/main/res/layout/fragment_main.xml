@@ -11,11 +11,4 @@
         android:adjustViewBounds="false"
         android:scaleType="fitCenter"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="C1 Pin Map"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal|top" />
 </FrameLayout>
