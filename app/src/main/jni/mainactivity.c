@@ -22,7 +22,6 @@ Java_com_example_andrew_gpio_MainActivity_setupInterrupt(JNIEnv *env, jobject in
 
 }
 
-
 JNIEXPORT jstring JNICALL
 Java_com_example_andrew_gpio_MainActivity_testFunction(JNIEnv *env, jobject instance) {
 

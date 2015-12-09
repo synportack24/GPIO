@@ -11,4 +11,10 @@ float getHumidity();
 
 float getPressure();
 
+float getUV();
+
+float getVisableLUX();
+
+float getIRLUX();
+
 #endif

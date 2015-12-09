@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity
         } catch (IOException e){
             Toast.makeText(this, "Unable to get root access, some functions might not work", Toast.LENGTH_LONG).show();
         }
+
+        //setupInterrupt();
     }
 
     @Override

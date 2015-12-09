@@ -1,5 +1,6 @@
 #include <bme280-i2c.h>
 #include <bme280.h>
+#include <si1132.h>
 #include "i2c.h"
 
 static int pressure;
@@ -12,6 +13,7 @@ float SEALEVELPRESSURE_HPA = 1024.25;
 void i2c_init(){
     char* i2c = "/dev/i2c-1";
 
+    si1132_begin(i2c);
     bme280_begin(i2c);
 
 }
@@ -34,4 +36,16 @@ float getHumidity() {
 
 float getPressure() {
     return (float)(pressure/100.0);
+}
+
+float getUV() {
+    return Si1132_readUV()/100.0;
+}
+
+float getVisableLUX() {
+    return Si1132_readVisible();
+}
+
+float getIRLUX() {
+    return Si1132_readIR();
 }
