@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentManager fm = getFragmentManager();
+        setTitle("Main");
         fm.beginTransaction().replace(R.id.content_frame, new main_fragment()).commit();
 
         try {
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, "Unable to get root access, some functions might not work", Toast.LENGTH_LONG).show();
         }
 
+        // Interrupt in Pin 33
         //setupInterrupt();
     }
 
