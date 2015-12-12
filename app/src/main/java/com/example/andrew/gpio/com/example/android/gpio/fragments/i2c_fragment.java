@@ -56,8 +56,20 @@ public class i2c_fragment extends Fragment {
             }
         });
 
+        setupI2CPermissions();
 
         return  rootView;
+    }
+
+    private void setupI2CPermissions(){
+        DataOutputStream os = new DataOutputStream(MainActivity.mProcess.getOutputStream());
+        try {
+            os.writeBytes("chmod 666 /dev/i2c-1\n");
+            os.flush();
+        } catch (IOException e){
+//           Toast.makeText(this, "Error chmoding i2c-1", Toast.LENGTH_LONG).show();
+        }
+
     }
 
 

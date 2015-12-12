@@ -45,7 +45,6 @@ public class gpio_fragment extends Fragment {
         } catch (IOException e){
 //            Toast.makeText(this, "Error Exporting Pins", Toast.LENGTH_LONG).show();
         }
-
     }
 
     public native void exportPin(int Pin);
