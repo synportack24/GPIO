@@ -6,6 +6,7 @@ JNIEXPORT void JNICALL
 Java_com_example_andrew_gpio_com_example_android_gpio_fragments_i2c_1fragment_updateSensors(
         JNIEnv *env, jobject instance) {
 
+    i2c_init();
     updateSensorValues();
 
 }

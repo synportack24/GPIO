@@ -46,6 +46,8 @@ public class i2c_fragment extends Fragment {
         tvLum = (TextView) rootView.findViewById(R.id.textViewi2cLums);
         humidityBar = (SeekBar) rootView.findViewById(R.id.seekBari2cHumidity);
 
+        setupI2CPermissions();
+
         UpdateValues();
 
         Button updateBtn = (Button) rootView.findViewById(R.id.buttoni2cUpdateSensors);
@@ -56,7 +58,7 @@ public class i2c_fragment extends Fragment {
             }
         });
 
-        setupI2CPermissions();
+
 
         return  rootView;
     }
@@ -82,7 +84,7 @@ public class i2c_fragment extends Fragment {
 
         tvTemp.setText(String.format("Tempurature: %4.2f *C", temp));
         tvPres.setText(String.format("Pressure: %4.2f hPa", pres));
-        tvLum.setText(String.format("Luminacitry: $4.2f", lum));
+        tvLum.setText(String.format("Luminosity: %4.2f", lum));
         humidityBar.setProgress((int) (Math.ceil(hum)));
 
     }

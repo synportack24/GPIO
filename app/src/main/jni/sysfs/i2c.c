@@ -10,7 +10,7 @@ static float altitude;
 
 float SEALEVELPRESSURE_HPA = 1024.25;
 
-void i2c_init(){
+void i2c_init() {
     char* i2c = "/dev/i2c-1";
 
     si1132_begin(i2c);
