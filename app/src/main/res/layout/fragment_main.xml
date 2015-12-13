@@ -11,4 +11,18 @@
         android:adjustViewBounds="false"
         android:scaleType="fitCenter"/>
 
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="Start Input Service"
+        android:id="@+id/buttonStartService"
+        android:layout_gravity="left|top" />
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="Stop Input Service"
+        android:id="@+id/buttonStopService"
+        android:layout_gravity="right|top" />
+
 </FrameLayout>

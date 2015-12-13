@@ -4,8 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +19,6 @@ import com.example.andrew.gpio.com.example.android.gpio.fragments.adc_fragment;
 import com.example.andrew.gpio.com.example.android.gpio.fragments.gpio_fragment;
 import com.example.andrew.gpio.com.example.android.gpio.fragments.i2c_fragment;
 import com.example.andrew.gpio.com.example.android.gpio.fragments.main_fragment;
-import com.example.andrew.gpio.com.example.android.gpio.fragments.pwm_fragment;
 import com.example.andrew.gpio.com.example.android.gpio.fragments.sysfstempurature_fragment;
 
 import java.io.IOException;
@@ -67,7 +64,11 @@ public class MainActivity extends AppCompatActivity
         }
 
         // Interrupt in Pin 33
-        setupInterrupt();
+        // External GPIO Input Service
+        // ---------------------------------------------------------------
+        Intent intent = new Intent(this, InputPinService.class);
+        intent.putExtra("Pin", 33);
+        startService(intent);
     }
 
     @Override
@@ -156,14 +157,9 @@ public class MainActivity extends AppCompatActivity
 
     public void IRQ_CallBack(){
         Toast.makeText(this, "GPIO Interrupt!", Toast.LENGTH_LONG).show();
-
-//        Intent intent = new Intent(this, NotificationReceiver.class);
     }
 
     public native void setupInterrupt();
-
-
-    public native void gpio_init();
 
     static {
         System.loadLibrary("cgpio");
