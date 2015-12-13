@@ -23,6 +23,9 @@ public class gpio_fragment extends Fragment {
 
     int pins[] = {28, 30, 31};
 
+
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,15 +34,39 @@ public class gpio_fragment extends Fragment {
 
         setupPins();
 
-        final CheckBox cbTest = (CheckBox) rootView.findViewById(R.id.checkBoxTest);
-        cbTest.setOnClickListener(new CheckBox.OnClickListener() {
+        final CheckBox cbTest28 = (CheckBox) rootView.findViewById(R.id.checkBox28);
+        cbTest28.setOnClickListener(new CheckBox.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int writeHight = 0; // LOW
-                if(cbTest.isChecked()){
+                if (cbTest28.isChecked()) {
+                    writeHight = 1;
+                }
+                pinWrite(28, writeHight);
+            }
+        });
+
+        final CheckBox cbTest30 = (CheckBox) rootView.findViewById(R.id.checkBox30);
+        cbTest30.setOnClickListener(new CheckBox.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int writeHight = 0; // LOW
+                if(cbTest30.isChecked()){
                     writeHight = 1;
                 }
                 pinWrite(30, writeHight);
+            }
+        });
+
+        final CheckBox cbTest31 = (CheckBox) rootView.findViewById(R.id.checkBox31);
+        cbTest31.setOnClickListener(new CheckBox.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int writeHight = 0; // LOW
+                if(cbTest31.isChecked()){
+                    writeHight = 1;
+                }
+                pinWrite(31, writeHight);
             }
         });
 
