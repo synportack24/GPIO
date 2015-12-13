@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         // Interrupt in Pin 33
-        //setupInterrupt();
+        setupInterrupt();
     }
 
     @Override
@@ -154,16 +154,13 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void IRQ_Toast(){
+    public void IRQ_CallBack(){
         Toast.makeText(this, "GPIO Interrupt!", Toast.LENGTH_LONG).show();
 
-
 //        Intent intent = new Intent(this, NotificationReceiver.class);
-
     }
 
     public native void setupInterrupt();
-
 
 
     public native void gpio_init();
