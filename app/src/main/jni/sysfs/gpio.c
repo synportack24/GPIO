@@ -148,6 +148,7 @@ int digitalRead(int pin) {
 bool setEdge(int pin) {
 
     // For now we just going to default to both edges
+	// falling <> both
 
 	memset(pinPath, 0 , sizeof(pinPath));
 	sprintf(pinPath, "%s/gpio%d%s", GPIO_PATH, pin, "/edge");

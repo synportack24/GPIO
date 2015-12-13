@@ -8,8 +8,8 @@
             android:title="GPIO" />
         <item android:id="@+id/nav_adc" android:icon="@android:drawable/ic_menu_gallery"
             android:title="ADC" />
-        <item android:id="@+id/nav_pwm" android:icon="@android:drawable/ic_menu_manage"
-            android:title="PWM" />
+        <!--<item android:id="@+id/nav_pwm" android:icon="@android:drawable/ic_menu_manage"-->
+            <!--android:title="PWM" />-->
     </group>
 
     <item android:title="Information">

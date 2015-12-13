@@ -11,41 +11,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="External Tempurature: "
-            android:id="@+id/textViewi2cTemp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Pressure:"
-            android:id="@+id/textViewi2cPressure"
-            android:layout_below="@+id/textViewi2cTemp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Luminacity:"
-            android:id="@+id/textViewi2cLums"
-            android:layout_below="@+id/textViewi2cPressure"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Humidity"
             android:id="@+id/textViewi2cHumidity"
+            android:layout_above="@+id/seekBari2cHumidity"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true" />
+            android:layout_alignParentStart="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -62,14 +32,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/seekBari2cHumidity"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/textViewi2cHumidity"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:max="100"
             android:progress="64"
-            android:indeterminate="false" />
+            android:indeterminate="false"
+            android:layout_above="@+id/buttoni2cUpdateSensors"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewI2C"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/textViewi2cHumidity" />
 
     </RelativeLayout>
 </FrameLayout>

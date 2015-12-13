@@ -120,9 +120,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_adc) {
             setTitle("ADC values");
             fragment = new adc_fragment();
-        } else if (id == R.id.nav_pwm) {
-            setTitle("PWM pin");
-            fragment = new pwm_fragment();
+//        } else if (id == R.id.nav_pwm) {
+//            setTitle("PWM pin");
+//            fragment = new pwm_fragment();
 
             // SYSFS Options
         } else if (id == R.id.nav_sysfsInfo) {

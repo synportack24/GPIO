@@ -1,14 +1,17 @@
 package com.example.andrew.gpio.com.example.android.gpio.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.example.andrew.gpio.MainActivity;
@@ -16,6 +19,10 @@ import com.example.andrew.gpio.R;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by andrew on 11/30/15.
@@ -23,9 +30,8 @@ import java.io.IOException;
 public class i2c_fragment extends Fragment {
 
 
-    TextView tvTemp;
-    TextView tvPres;
-    TextView tvLum;
+
+    ListView i2cListView;
     SeekBar humidityBar;
 
     @Nullable
@@ -35,16 +41,14 @@ public class i2c_fragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_i2c, container, false);
 
-        DataOutputStream os = new DataOutputStream(MainActivity.mProcess.getOutputStream());
-        try {
-            os.writeBytes("chmod 666 /dev/i2c-1\n");
-        } catch (IOException e){
+//        DataOutputStream os = new DataOutputStream(MainActivity.mProcess.getOutputStream());
+//        try {
+//            os.writeBytes("chmod 666 /dev/i2c-1\n");
+//        } catch (IOException e){
+//        }
 
-        }
-        tvTemp = (TextView) rootView.findViewById(R.id.textViewi2cTemp);
-        tvPres = (TextView) rootView.findViewById(R.id.textViewi2cPressure);
-        tvLum = (TextView) rootView.findViewById(R.id.textViewi2cLums);
         humidityBar = (SeekBar) rootView.findViewById(R.id.seekBari2cHumidity);
+        i2cListView = (ListView) rootView.findViewById(R.id.listViewI2C);
 
         setupI2CPermissions();
 
@@ -64,14 +68,15 @@ public class i2c_fragment extends Fragment {
     }
 
     private void setupI2CPermissions(){
-        DataOutputStream os = new DataOutputStream(MainActivity.mProcess.getOutputStream());
-        try {
-            os.writeBytes("chmod 666 /dev/i2c-1\n");
-            os.flush();
-        } catch (IOException e){
+        if(MainActivity.mProcess != null) {
+            DataOutputStream os = new DataOutputStream(MainActivity.mProcess.getOutputStream());
+            try {
+                os.writeBytes("chmod 666 /dev/i2c-1\n");
+                os.flush();
+            } catch (IOException e) {
 //           Toast.makeText(this, "Error chmoding i2c-1", Toast.LENGTH_LONG).show();
+            }
         }
-
     }
 
 
@@ -80,12 +85,61 @@ public class i2c_fragment extends Fragment {
         float temp = getTemperature();
         float pres = getPressure();
         float hum = getHumidity();
-        float lum = getUV();
+        float uv = getUV();
+        float lux = getVisableLUX();
 
-        tvTemp.setText(String.format("Tempurature: %4.2f *C", temp));
-        tvPres.setText(String.format("Pressure: %4.2f hPa", pres));
-        tvLum.setText(String.format("Luminosity: %4.2f", lum));
+        //tvTemp.setText(String.format("Tempurature: %4.2f *C", temp));
+        //tvPres.setText(String.format("Pressure: %4.2f hPa", pres));
+        //tvLum.setText(String.format("Luminosity: %4.2f", lum));
         humidityBar.setProgress((int) (Math.ceil(hum)));
+
+
+
+        List<Map<String, String>> i2clist = new ArrayList<Map<String, String>>();
+
+        String themerature = String.format("%4.2f C", temp);
+        Map<String, String> t0m = new HashMap<>();
+        t0m.put("Name", "Temperature");
+        t0m.put("Value", themerature);
+        i2clist.add(t0m);
+
+        String pressure = String.format("%4.2f hPa", pres);
+        Map<String, String> t0p = new HashMap<>();
+        t0p.put("Name", "Pressure");
+        t0p.put("Value", pressure);
+        i2clist.add(t0p);
+
+        String humidity = String.format("%4.2f %%", hum);
+        Map<String, String> t0h = new HashMap<>();
+        t0h.put("Name", "Humidity");
+        t0h.put("Value", humidity);
+        i2clist.add(t0h);
+
+        String ultraV = String.format("%4.2f lux", uv);
+        Map<String, String> t0uv = new HashMap<>();
+        t0uv.put("Name", "Ultra Violet");
+        t0uv.put("Value", ultraV);
+        i2clist.add(t0uv);
+
+        String vlux = String.format("%4.2f lux", lux);
+        Map<String, String> t0lx = new HashMap<>();
+        t0lx.put("Name", "Visable Light");
+        t0lx.put("Value", vlux);
+        i2clist.add(t0lx);
+
+//        String vlux = String.format("%4.2f lux", lux);
+//        Map<String, String> t0lx = new HashMap<>();
+//        t0lx.put("Name", "Visable LUX");
+//        t0lx.put("Value", vlux);
+//        i2clist.add(t0lx);
+
+
+        Context ctext = getActivity().getBaseContext();  // getContext not valid for API 19 =(
+        SimpleAdapter adapter = new SimpleAdapter(ctext, i2clist,  android.R.layout.simple_list_item_2, new String[] {"Name", "Value"}, new int[] {android.R.id.text1, android.R.id.text2});
+        //SimpleAdapter adapter = new SimpleAdapter(attachedContext, syslist,  android.R.layout.simple_list_item_2, new String[] {"Name", "Value"}, new int[] {android.R.id.text1, android.R.id.text2});
+        i2cListView.setAdapter(adapter);
+
+
 
     }
 
