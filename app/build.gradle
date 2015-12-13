@@ -25,6 +25,8 @@ model {
         platformVersion = 21
         CFlags += "-DANDROID".toString()
         CFlags += "-D_NDK_MATH_NO_SOFTFP=0".toString()
+        //LOCAL_LDLIBS += -L$(SYSROOT)/usr/lib
+        //llog
         CFlags += "-I${file("src/main/jni/sysfs")}".toString()
         CFlags += "-I${file("src/main/jni/sensors")}".toString()
     }

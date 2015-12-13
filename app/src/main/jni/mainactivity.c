@@ -21,18 +21,16 @@ Java_com_example_andrew_gpio_MainActivity_setupInterrupt(JNIEnv *env, jobject in
 
 
     // TODO
-    IRQ(33);
-
-
+    //IRQ(33);
 
 
     // Java JNI Fun stuff
     // -------------------------------------------------------------------
     jclass thisClass = (*env)->GetObjectClass(env, instance);
-    jmethodID callBackMethodID = (*env)->GetMethodID(env, instance, "IRQ_CallBack", "()V");
+    jmethodID callBackMethodID = (*env)->GetMethodID(env, thisClass, "IRQ_CallBack", "()V");
 
     if(callBackMethodID == NULL) {
-        __android_log_print(ANDROID_LOG_WARN, "GPIO", "Call Back function can't be found =(");
+        //__android_log_print(ANDROID_LOG_WARN, "GPIO", "Call Back function can't be found =(");
         return;
     }
 
