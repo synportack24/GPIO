@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, InputPinService.class);
         intent.putExtra("Pin", 33);
         startService(intent);
+//        setupInterrupt();
     }
 
     @Override

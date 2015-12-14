@@ -222,7 +222,7 @@ void IRQ(int pin) {
     memset(pinPath, 0 , sizeof(pinPath));
 	sprintf(pinPath, "%s/gpio%d/value", GPIO_PATH, pin);
 
-	if ((fd_pinValue = open(pinPath, O_RDONLY | O_NONBLOCK)) == -1 ){
+	if ((fd_pinValue = open(pinPath, O_RDONLY | O_NONBLOCK)) == -1 ) {
 		perror("IRQ getting value fd: ");
 	}
 

@@ -8,6 +8,13 @@ import android.os.Process;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class InputPinService extends Service {
 
     private int pin = 0;
@@ -24,7 +31,28 @@ public class InputPinService extends Service {
         super.onCreate();
         HandlerThread thread = new HandlerThread("ServiceStartArguments", Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
+    }
 
+
+    private void setupPins() {
+        if(MainActivity.mProcess != null) {
+            DataOutputStream os = new DataOutputStream(MainActivity.mProcess.getOutputStream());
+            try {
+                // Export pin
+                os.writeBytes("echo " + pin + " > /sys/class/gpio/export\n");
+                // set direction
+                os.writeBytes("chmod 666 /sys/class/gpio/gpio" + pin + "/direction\n");
+                os.writeBytes("echo in > /sys/class/gpio/gpio" + pin + "/direction\n");
+                // Edge Type
+                os.writeBytes("chmod 666 /sys/class/gpio/gpio" + pin + "/edge\n");
+                os.writeBytes("echo falling > /sys/class/gpio/gpio" + pin + "/edge\n");
+                // Allow Access To value
+                os.writeBytes("chmod 666 /sys/class/gpio/gpio" + pin + "/value\n");
+                os.flush();
+            } catch (IOException e) {
+//            Toast.makeText(this, "Error Exporting Pins", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     @Nullable
@@ -42,6 +70,8 @@ public class InputPinService extends Service {
             return super.onStartCommand(intent, flags, startId);
         }
 
+        setupPins();
+
         background.start();
         //Interrput();
 
@@ -57,11 +87,12 @@ public class InputPinService extends Service {
     }
 
 
+    // Can not be accessed from Device only emulator
     public void toastmessage(){
         Toast.makeText(this, "Button Press", Toast.LENGTH_LONG).show();
     }
 
-    public native Boolean setup_Interrupt(int pin);
+    public native void setupIRQ(int pin);
 
 
 
@@ -70,15 +101,37 @@ public class InputPinService extends Service {
 
         // After call for background.start this run method call
         public void run() {
-            Boolean IRQ_Loop = true;
-            while(IRQ_Loop) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            int pin = 33;
 
-                IRQ_Loop = setup_Interrupt(33);
+            Boolean IRQ_Loop = true;
+            FileListener fl = new FileListener("/sys/class/gpio/gpio" + pin + "/");
+            String pastValue = "1";
+
+            try {
+                while(IRQ_Loop) {
+
+                    Thread.sleep(250);
+
+                    BufferedReader br = new BufferedReader(new FileReader("/sys/class/gpio/gpio" + pin + "/value"));
+                    String sl = br.readLine();
+                    if( sl != null ) {
+                        if(sl.equalsIgnoreCase(pastValue) == false && pastValue.equalsIgnoreCase("0")){
+                            edgeChange();
+                        }
+                        pastValue = sl;
+                    }
+
+
+                //setupIRQ(pin);
+
+                //edgeChange();
+
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (FileNotFoundException e){
+                e.printStackTrace();
+            } catch(IOException e) {
 
             }
             // Code only goes here if something bad happened
@@ -103,6 +156,12 @@ public class InputPinService extends Service {
                 handler.sendMessage(msgObj);
             }
         }
+
+
+
+
+
+
 
         private final Handler handler = new Handler() {
 
