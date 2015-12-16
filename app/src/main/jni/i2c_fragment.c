@@ -57,3 +57,13 @@ Java_com_example_andrew_gpio_com_example_android_gpio_fragments_i2c_1fragment_ge
     return getIRLUX();
 
 }
+
+// This is the get Tempurature for the GPIO
+JNIEXPORT jfloat JNICALL
+Java_com_example_andrew_gpio_InputPinService_getTempurature(JNIEnv *env, jobject instance) {
+
+    i2c_init();
+    updateSensorValues();
+    return getTemperature();
+
+}

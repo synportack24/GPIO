@@ -94,6 +94,7 @@ public class InputPinService extends Service {
 
     public native void setupIRQ(int pin);
 
+    public native float getTempurature();
 
 
     Thread background = new Thread(new Runnable() {
@@ -104,14 +105,13 @@ public class InputPinService extends Service {
             int pin = 33;
 
             Boolean IRQ_Loop = true;
-            FileListener fl = new FileListener("/sys/class/gpio/gpio" + pin + "/");
+            //FileListener fl = new FileListener("/sys/class/gpio/gpio" + pin + "/");
             String pastValue = "1";
-
+//            edgeChange();
             try {
                 while(IRQ_Loop) {
 
                     Thread.sleep(250);
-
                     BufferedReader br = new BufferedReader(new FileReader("/sys/class/gpio/gpio" + pin + "/value"));
                     String sl = br.readLine();
                     if( sl != null ) {
@@ -159,10 +159,6 @@ public class InputPinService extends Service {
 
 
 
-
-
-
-
         private final Handler handler = new Handler() {
 
             public void handleMessage(Message msg) {
@@ -173,7 +169,19 @@ public class InputPinService extends Service {
                 } else {
                     Toast.makeText(getBaseContext(), "Error No message text", Toast.LENGTH_SHORT).show();
                 }
+
+
+
+                // Write to DB
+                sqlHelper db = new sqlHelper(getBaseContext());
+                float tempf = getTempurature();
+                double tempd = tempf;
+                i2cValue v = new i2cValue(tempd);
+                db.addTempuraturestoTable(v);
+                db.close();
             }
+
+
 
         };
 
